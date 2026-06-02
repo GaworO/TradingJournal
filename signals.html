@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT NQ — Signals</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0a0a; color: #e8e8e8; font-family: -apple-system, sans-serif; padding: 20px; }
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+.stat { background: #111; border-radius: 8px; padding: 12px; text-align: center; }
+.stat-val { font-size: 20px; font-weight: 500; }
+.stat-lbl { font-size: 10px; color: #555; text-transform: uppercase; margin-top: 2px; }
+.green { color: #4ade80; } .red { color: #f87171; }
+.card { background: #111; border: 1px solid #222; border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+.card-title { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #555; margin-bottom: 12px; }
+.form-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 10px; }
+.field { display: flex; flex-direction: column; gap: 3px; }
+.field label { font-size: 10px; color: #555; text-transform: uppercase; }
+.field input, .field select { padding: 8px; border: 1px solid #333; border-radius: 5px; background: #181818; color: #e8e8e8; font-size: 13px; width: 100%; }
+.field-wide { grid-column: span 2; }
+.btn-row { display: flex; gap: 8px; margin-top: 8px; }
+.btn { padding: 10px 16px; border-radius: 5px; font-size: 13px; cursor: pointer; border: none; font-weight: 500; }
+.btn-add { background: #0d2a1a; color: #4ade80; border: 1px solid #4ade80; }
+.btn-refresh { background: #181818; color: #888; border: 1px solid #333; }
+.btn-csv { background: #0d1a2e; color: #60a5fa; border: 1px solid #60a5fa; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; padding: 6px 8px; border-bottom: 1px solid #222; font-size: 10px; color: #555; font-weight: 400; }
+td { padding: 7px 8px; border-bottom: 1px solid #181818; color: #888; }
+.badge { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.bl { background: #0d2a1a; color: #4ade80; }
+.bs { background: #2a0d0d; color: #f87171; }
+.bt1 { background: #2a1f0d; color: #fbbf24; }
+.bt2, .bt3 { background: #0d2a1a; color: #4ade80; }
+.bsl { background: #2a0d0d; color: #f87171; }
+.bbe { background: #1a1a1a; color: #555; }
+.filters { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.filters select { padding: 6px 8px; border: 1px solid #333; border-radius: 5px; background: #181818; color: #e8e8e8; font-size: 12px; }
+.empty { text-align: center; padding: 2rem; color: #555; font-size: 13px; }
+.analysis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ana-block { background: #181818; border-radius: 6px; padding: 10px; }
+.ana-title { font-size: 10px; color: #555; text-transform: uppercase; margin-bottom: 8px; letter-spacing: .1em; }
+.ana-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid #222; }
+.ana-row:last-child { border-bottom: none; }
+@media(max-width:500px) { .form-grid { grid-template-columns: 1fr; } .field-wide { grid-column: span 1; } .stats { grid-template-columns: repeat(2,1fr); } .analysis { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val" id="ss-total">0</div><div class="stat-lbl">Sygnały</div></div>
+  <div class="stat"><div class="stat-val" id="ss-wr">—</div><div class="stat-lbl">Win rate</div></div>
+  <div class="stat"><div class="stat-val" id="ss-pnl">$0</div><div class="stat-lbl">Łączny PnL</div></div>
+  <div class="stat"><div class="stat-val" id="ss-avg">—</div><div class="stat-lbl">Avg / trade</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Dodaj sygnał</div>
+  <div class="form-grid">
+    <div class="field"><label>Typ</label>
+      <select id="sf-type"><option>LONG STAR</option><option>SHORT STAR</option><option>LONG OTE</option><option>SHORT OTE</option></select></div>
+    <div class="field"><label>Katalizator</label>
+      <select id="sf-cat"><option>NYL.L</option><option>NYL.H</option><option>SSL Sweep</option><option>BSL Sweep</option><option>LO.L</option><option>LO.H</option><option>NYAM.L</option><option>NYAM.H</option><option>NDOG.L</option><option>NDOG.H</option></select></div>
+    <div class="field"><label>Strategia</label>
+      <select id="sf-strategy"><option value="REV">REV — Reversal</option><option value="CONT">CONT — Continuation</option></select></div>
+    <div class="field"><label>Sesja</label>
+      <select id="sf-session"><option>NY PM SB</option><option>NY AM SB</option><option>London SB</option></select></div>
+    <div class="field"><label>Weekly</label>
+      <select id="sf-weekly"><option>BULL</option><option>BEAR</option></select></div>
+    <div class="field"><label>Entry</label><input type="number" id="sf-entry" placeholder="20345" step="0.25"></div>
+    <div class="field"><label>SL</label><input type="number" id="sf-sl" placeholder="20318" step="0.25"></div>
+    <div class="field"><label>T1</label><input type="number" id="sf-t1" placeholder="20383" step="0.25"></div>
+    <div class="field"><label>Wynik</label>
+      <select id="sf-result"><option value="">— czeka —</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3 ★</option><option value="BE">BE</option><option value="SL">SL</option></select></div>
+    <div class="field field-wide"><label>Notatka</label><input type="text" id="sf-note" placeholder="np. NYL sweep, Weekly bull, silny momentum"></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-add" id="btn-add" onclick="sigAdd()">+ Dodaj</button>
+    <button class="btn btn-refresh" onclick="sigRefresh()">↺ Odśwież</button>
+    <button class="btn btn-csv" onclick="sigCSV()">↓ CSV</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Historia</div>
+  <div class="filters">
+    <select onchange="sigShow()" id="fr"><option value="">Wszystkie</option><option value="win">Wygrane</option><option value="loss">Straty</option><option value="open">Oczekujące</option></select>
+    <select onchange="sigShow()" id="fd"><option value="">Long+Short</option><option value="LONG">LONG</option><option value="SHORT">SHORT</option></select>
+    <select onchange="sigShow()" id="fs"><option value="">Wszystkie sesje</option><option value="NY PM">NY PM</option><option value="NY AM">NY AM</option><option value="London">London</option></select>
+  </div>
+  <div id="tbl-wrap"><div class="empty" id="empty-msg">Dodaj pierwszy sygnał powyżej.</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Analiza</div>
+  <div class="analysis" id="analysis"><div style="color:#555;font-size:13px;grid-column:span 3">Brak zamkniętych trade'ów.</div></div>
+</div>
+
+<script>
+var KEY  = 'ict_signals_v4';
+var RISK = 580;
+var URL  = 'https://nqsignals-production.up.railway.app/signals';
+var data = [];
+
+// Load from localStorage on start
+try { var s = localStorage.getItem(KEY); if (s) data = JSON.parse(s); } catch(e) {}
+sigAll();
+
+// Try Railway in background
+setTimeout(function() {
+  fetch(URL + '?t=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(d) { if (d && d.signals && d.signals.length) { data = d.signals; save(); sigAll(); } })
+    .catch(function(e) { console.log('Railway:', e.message); });
+}, 500);
+
+function save() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e) {} }
+
+function pnl(result, slPts) {
+  if (!result || !slPts) return '';
+  var qty = Math.max(1, Math.floor(RISK / (slPts * 2)));
+  if (result === 'T1') return Math.round(qty * slPts * 2 * 1.5 / 3);
+  if (result === 'T2') return Math.round(qty * slPts * 2 * 4.5 / 3);
+  if (result === 'T3') return Math.round(qty * slPts * 2 * 9.5 / 3);
+  if (result === 'BE') return 0;
+  if (result === 'SL') return -RISK;
+  return '';
+}
+
+function sigAdd() {
+  var entry = parseFloat(document.getElementById('sf-entry').value);
+  if (!entry) { document.getElementById('sf-entry').focus(); return; }
+  var sl    = parseFloat(document.getElementById('sf-sl').value) || 0;
+  var t1    = parseFloat(document.getElementById('sf-t1').value) || 0;
+  var res   = document.getElementById('sf-result').value;
+  var typ   = document.getElementById('sf-type').value;
+  var isL   = typ.indexOf('LONG') >= 0;
+  var slPts = sl ? Math.abs(entry - sl) : 25;
+  var sig = {
+    DateTime: new Date().toLocaleString('pl-PL'),
+    Type: typ, Direction: isL ? 'LONG' : 'SHORT',
+    Quality: typ.indexOf('STAR') >= 0 ? 'STAR' : 'OTE',
+    Strategy: document.getElementById('sf-strategy').value,
+    Catalyst: document.getElementById('sf-cat').value,
+    Session:  document.getElementById('sf-session').value,
+    Entry: entry, SL: sl || '', T1: t1 || '',
+    T2: t1 ? Math.round(isL ? entry+slPts*3 : entry-slPts*3) : '',
+    T3: t1 ? Math.round(isL ? entry+slPts*5 : entry-slPts*5) : '',
+    Result: res, PnL: pnl(res, slPts),
+    Note: document.getElementById('sf-note').value,
+    Weekly: document.getElementById('sf-weekly').value
+  };
+  data.unshift(sig);
+  save();
+  sigAll();
+  // Clear fields
+  ['sf-entry','sf-sl','sf-t1','sf-note'].forEach(function(id) { document.getElementById(id).value = ''; });
+  document.getElementById('sf-result').value = '';
+  // Feedback
+  var btn = document.getElementById('btn-add');
+  btn.textContent = '✓ Dodano!';
+  setTimeout(function() { btn.textContent = '+ Dodaj'; }, 2000);
+  // Send to Railway
+  fetch(URL, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(sig) })
+    .catch(function(e) { console.log('POST:', e.message); });
+}
+
+function sigRefresh() {
+  document.getElementById('empty-msg').textContent = 'Ładowanie z Railway...';
+  fetch(URL + '?t=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(d) { if (d && d.signals && d.signals.length) { data = d.signals; save(); } sigAll(); })
+    .catch(function(e) { sigAll(); });
+}
+
+function sigCSV() {
+  if (!data.length) { return; }
+  var h = ['DateTime','Type','Direction','Quality','Strategy','Catalyst','Session','Entry','SL','T1','T2','T3','Result','PnL','Note','Weekly'];
+  var rows = data.map(function(s) { return h.map(function(k) { return '"'+(s[k]||'')+'"'; }).join(','); });
+  var blob = new Blob(['\uFEFF'+h.join(',')+'\n'+rows.join('\n')], {type:'text/csv;charset=utf-8'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'ICT_NQ_'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+}
+
+function badge(t, cls) { return '<span class="badge '+cls+'">'+t+'</span>'; }
+function bDir(t) { return badge(t.indexOf('LONG')>=0?'LONG':'SHORT', t.indexOf('LONG')>=0?'bl':'bs'); }
+function bRes(r) {
+  if (!r) return '<span style="color:#555">czeka</span>';
+  var m = {T1:'bt1',T2:'bt2',T3:'bt3',SL:'bsl',BE:'bbe'};
+  return badge(r, m[r]||'');
+}
+
+function sigShow() {
+  var fr = document.getElementById('fr').value;
+  var fd = document.getElementById('fd').value;
+  var fs = document.getElementById('fs').value;
+  var filtered = data.filter(function(s) {
+    var r = s.Result||'', d = s.Direction||s.Type||'', ss = s.Session||'';
+    if (fr==='win'  && ['T1','T2','T3'].indexOf(r)<0) return false;
+    if (fr==='loss' && r!=='SL') return false;
+    if (fr==='open' && r) return false;
+    if (fd && d.indexOf(fd)<0) return false;
+    if (fs && ss.indexOf(fs)<0) return false;
+    return true;
+  });
+  var wrap = document.getElementById('tbl-wrap');
+  var empty = document.getElementById('empty-msg');
+  var old = wrap.querySelector('table');
+  if (!filtered.length) {
+    empty.style.display = 'block';
+    empty.textContent = data.length ? 'Brak dla filtrów.' : 'Dodaj pierwszy sygnał.';
+    if (old) old.remove(); return;
+  }
+  empty.style.display = 'none';
+  var rows = filtered.map(function(s) {
+    var p = Number(s.PnL);
+    var pc = p>0?'#4ade80':p<0?'#f87171':'#555';
+    return '<tr><td style="font-size:11px;color:#555">'+String(s.DateTime||'').slice(0,16)+'</td><td>'+bDir(s.Type||s.Direction)+'</td><td style="font-size:11px">'+s.Quality+'</td><td style="font-size:11px;color:'+(s.Strategy==='CONT'?'#60a5fa':'#a78bfa')+'">'+( s.Strategy||'REV')+'</td><td style="font-size:11px">'+s.Catalyst+'</td><td style="font-family:monospace">'+s.Entry+'</td><td style="font-family:monospace;color:#f87171">'+s.SL+'</td><td style="font-family:monospace;color:#4ade80">'+s.T1+'</td><td>'+bRes(s.Result)+'</td><td style="font-weight:500;color:'+pc+'">'+(s.PnL!==''&&s.PnL!==undefined?'$'+s.PnL:'—')+'</td><td style="font-size:11px;color:#555;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+s.Note+'</td></tr>';
+  }).join('');
+  var html = '<table><thead><tr><th>Czas</th><th>Dir</th><th>Jakość</th><th>Strat</th><th>Katalizator</th><th>Entry</th><th>SL</th><th>T1</th><th>Wynik</th><th>PnL</th><th>Notatka</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  if (old) old.outerHTML = html; else wrap.insertAdjacentHTML('beforeend', html);
+}
+
+function sigStats() {
+  var closed = data.filter(function(s){return s.Result;});
+  var wins   = closed.filter(function(s){return ['T1','T2','T3'].indexOf(s.Result)>=0;});
+  var wr     = closed.length ? Math.round(wins.length/closed.length*100) : null;
+  var total  = closed.reduce(function(a,s){return a+(Number(s.PnL)||0);},0);
+  var avg    = closed.length ? Math.round(total/closed.length) : null;
+  document.getElementById('ss-total').textContent = data.length;
+  var we = document.getElementById('ss-wr'); we.textContent = wr!==null?wr+'%':'—'; we.className='stat-val '+(wr>=50?'green':wr!==null?'red':'');
+  var pe = document.getElementById('ss-pnl'); pe.textContent = '$'+Math.round(total); pe.className='stat-val '+(total>0?'green':total<0?'red':'');
+  var ae = document.getElementById('ss-avg'); ae.textContent = avg!==null?'$'+avg:'—'; ae.className='stat-val '+(avg>0?'green':avg<0?'red':'');
+}
+
+function sigAnalysis() {
+  var closed = data.filter(function(s){return s.Result;});
+  var el = document.getElementById('analysis');
+  if (!closed.length) { el.innerHTML='<div style="color:#555;font-size:13px;grid-column:span 3">Brak zamkniętych trade\'ów.</div>'; return; }
+  function wrBy(key) {
+    var g={};
+    closed.forEach(function(s){var k=s[key]||'?';if(!g[k])g[k]={w:0,t:0};g[k].t++;if(['T1','T2','T3'].indexOf(s.Result)>=0)g[k].w++;});
+    return Object.keys(g).sort(function(a,b){return g[b].t-g[a].t;}).map(function(k){var v=g[k];var wr=Math.round(v.w/v.t*100);return '<div class="ana-row"><span>'+k+'</span><span style="color:'+(wr>=50?'#4ade80':'#f87171');+'">'+wr+'% ('+v.w+'/'+v.t+')</span></div>';}).join('');
+  }
+  el.innerHTML='<div class="ana-block"><div class="ana-title">WR per typ</div>'+wrBy('Type')+'</div><div class="ana-block"><div class="ana-title">WR per sesja</div>'+wrBy('Session')+'</div><div class="ana-block"><div class="ana-title">WR per katalizator</div>'+wrBy('Catalyst')+'</div>';}
+
+function sigAll() { sigStats(); sigShow(); sigAnalysis(); }
+</script>
+</body>
+</html>
