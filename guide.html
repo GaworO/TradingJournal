@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT NQ — System (2026)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#0a0a0a; --surface:#141414; --surface2:#1c1c1c; --border:#262626; --border2:#333;
+  --green:#4ade80; --green-dim:#0f2a1a; --green-mid:#1a3d2a;
+  --red:#f87171; --red-dim:#2a0f0f; --red-mid:#3d1a1a;
+  --amber:#fbbf24; --amber-dim:#2a1f08; --amber-mid:#3d2f0a;
+  --aqua:#22d3ee; --aqua-dim:#0a2a30;
+  --text:#ebebeb; --text-dim:#555; --text-mid:#888;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.55;
+  max-width:880px;margin:0 auto;padding:24px 20px 80px}
+.mono{font-family:'DM Mono',monospace}
+.eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px}
+a{color:var(--aqua);text-decoration:none}
+b,strong{font-weight:600;color:#fff}
+
+/* TOP */
+.top{border-bottom:1px solid var(--border);padding-bottom:18px;margin-bottom:14px}
+.top .brand{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green)}
+.top h1{font-size:30px;font-weight:600;letter-spacing:-.02em;margin:10px 0 6px;line-height:1.1}
+.top .tag{font-size:14px;color:var(--text-mid);max-width:60ch}
+
+/* STAT STRIP (hero thesis) */
+.thesis{background:linear-gradient(180deg,var(--surface),transparent);border:1px solid var(--border);border-radius:5px;padding:20px;margin:22px 0}
+.thesis .line{font-size:15px;line-height:1.6}
+.thesis .line b{color:var(--amber)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+@media(max-width:620px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:13px 14px}
+.stat .p{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:7px}
+.stat .v{font-family:'DM Mono',monospace;font-size:21px;font-weight:500;line-height:1}
+.stat .s{font-size:11px;color:var(--text-mid);margin-top:6px}
+.stat.g .v{color:var(--green)} .stat.r .v{color:var(--red)}
+.stat .tag{display:inline-block;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-top:8px}
+.stat.g .tag{background:var(--green-mid);color:var(--green)} .stat.r .tag{background:var(--red-mid);color:var(--red)}
+
+/* SECTIONS */
+section{margin:34px 0;scroll-margin-top:20px}
+h2{font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mid);
+  font-weight:400;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:16px}
+h2 .n{color:var(--green);margin-right:10px}
+h3{font-size:15px;font-weight:600;margin:18px 0 8px}
+p{margin:10px 0;color:var(--text)}
+p.muted{color:var(--text-mid);font-size:13.5px}
+
+/* CHAIN */
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+.ch{flex:1;min-width:120px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:12px;border-left:2px solid var(--aqua)}
+.ch .k{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim)}
+.ch .t{font-size:13.5px;font-weight:500;margin-top:4px}
+.ch .d{font-size:11.5px;color:var(--text-mid);margin-top:3px;line-height:1.4}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);font-weight:400}
+td.g{color:var(--green)} td.r{color:var(--red)} td.a{color:var(--amber)} td.mono{font-family:'DM Mono',monospace}
+
+/* CARDS / CALLOUTS */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:620px){.two{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:15px}
+.card .ct{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}
+.card.g .ct{color:var(--green)} .card.r .ct{color:var(--red)} .card.a .ct{color:var(--amber)}
+.card p{font-size:13px;margin:5px 0;color:var(--text-mid)}
+.callout{border-radius:4px;padding:14px 16px;margin:14px 0;font-size:14px;line-height:1.55;border:1px solid}
+.callout.a{background:var(--amber-dim);border-color:var(--amber-mid)}
+.callout.g{background:var(--green-dim);border-color:var(--green-mid)}
+.callout.r{background:var(--red-dim);border-color:var(--red-mid)}
+ul{margin:10px 0 10px 4px;list-style:none}
+li{position:relative;padding:6px 0 6px 20px;font-size:13.5px;line-height:1.5}
+li:before{content:"›";position:absolute;left:2px;color:var(--green)}
+li.no:before{content:"✕";color:var(--red)}
+
+.nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;margin:-24px -20px 0;padding-left:20px;padding-right:20px;z-index:10;display:flex;gap:14px;overflow-x:auto;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.nav a{color:var(--text-dim);white-space:nowrap} .nav a:hover{color:var(--text)}
+.foot{margin-top:40px;border-top:1px solid var(--border);padding-top:16px;font-size:12px;color:var(--text-dim);line-height:1.7}
+.foot .mono{color:var(--text-mid)}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="#staty">Statystyki</a><a href="#strategia">Strategia</a><a href="#katalizatory">Katalizatory</a>
+  <a href="#wyjscie">Wyjście</a><a href="#rezim">Reżim</a><a href="#system">System live</a><a href="#przyklad">Przykład</a><a href="#niegrac">Kiedy nie grać</a>
+</div>
+
+<div class="top">
+  <div class="brand">◇ ICT NQ — System · czerwiec 2026</div>
+  <h1>Strategia, statystyki, reżim</h1>
+  <div class="tag">Detektor ICT na MNQ 1-min + agent live z alertami Telegram. Ten dokument opisuje to, co realnie zweryfikowaliśmy na danych — bez upiększania.</div>
+</div>
+
+<!-- HERO THESIS -->
+<div class="thesis">
+  <div class="line">Jedna prawda, od której wszystko zależy: <b>przewaga jest realna, ale zależna od reżimu.</b> Zarabia w trendzie (czyste displacementy, wąskie SL), zasypia w choppy (szerokie SL, brak czystych wybić). Zadanie to nie „graj zawsze", tylko <b>graj gdy trend, siedź gdy choppy</b>.</div>
+  <div class="stats">
+    <div class="stat g"><div class="p">2022-06 → 2023-06</div><div class="v">+26%</div><div class="s">PF 3.24 · WR 79% · 98 trade</div><span class="tag">trend</span></div>
+    <div class="stat g"><div class="p">2025 → pocz. 2026</div><div class="v">+23%</div><div class="s">PF 3.08 · WR 78% · 93 trade</div><span class="tag">trend</span></div>
+    <div class="stat r"><div class="p">luty → cze 2026</div><div class="v">~0%</div><div class="s">PF ~1.0 · 18 trade</div><span class="tag">choppy</span></div>
+  </div>
+</div>
+
+<!-- STATYSTYKI -->
+<section id="staty">
+  <h2><span class="n">01</span>Statystyki — 2 lata, po kosztach</h2>
+  <p class="muted">Backtest na danych 1-min Databento (MNQ.v.0, z wolumenem), regułą wyjścia niżej, z prowizją i poślizgiem (~$4/kontr round-trip), ryzyko 0,5% na koncie 100k. Wejścia modelowe (po cenie CE), intrabar liczony konserwatywnie (stop pierwszy) — to estymata, nie obietnica.</p>
+  <table>
+    <tr><th>Okres</th><th>Reżim</th><th>Trade</th><th>P&L po kosztach</th><th>WR</th><th>PF</th></tr>
+    <tr><td class="mono">2022-06 → 2023-06</td><td>trendowy</td><td>98</td><td class="g">+$26,061 (+26%)</td><td>79%</td><td>3.24</td></tr>
+    <tr><td class="mono">2025 → pocz. 2026</td><td>trendowy</td><td>93</td><td class="g">+$23,027 (+23%)</td><td>78%</td><td>3.08</td></tr>
+    <tr><td class="mono">luty → cze 2026</td><td>choppy</td><td>18</td><td class="r">~$0 (martwo)</td><td>—</td><td>~1.0</td></tr>
+  </table>
+
+  <svg viewBox="0 0 772 224" style="width:100%;height:auto;margin:14px 0;background:var(--surface);border:1px solid var(--border);border-radius:5px;display:block">
+    <line x1="64" y1="182.4" x2="684" y2="182.4" stroke="#444" stroke-width="1" stroke-dasharray="3 3"/>
+    <line x1="64" y1="123.7" x2="684" y2="123.7" stroke="var(--border)" stroke-width="1"/>
+    <line x1="64" y1="65.1" x2="684" y2="65.1" stroke="var(--border)" stroke-width="1"/>
+    <text x="58" y="185.4" text-anchor="end" font-family="DM Mono,monospace" font-size="9" fill="#666">$0</text>
+    <text x="58" y="126.7" text-anchor="end" font-family="DM Mono,monospace" font-size="9" fill="#666">$10k</text>
+    <text x="58" y="68.1" text-anchor="end" font-family="DM Mono,monospace" font-size="9" fill="#666">$20k</text>
+    <polyline points="64.0,185.5 70.4,178.9 76.8,172.5 83.2,171.9 89.6,165.4 96.0,158.8 102.4,152.2 108.7,151.5 115.1,150.8 121.5,154.0 127.9,157.1 134.3,150.6 140.7,144.0 147.1,137.4 153.5,130.8 159.9,124.3 166.3,127.5 172.7,127.1 179.1,126.6 185.4,129.8 191.8,132.9 198.2,132.2 204.6,131.4 211.0,134.6 217.4,133.8 223.8,133.1 230.2,132.3 236.6,131.6 243.0,131.0 249.4,134.3 255.8,127.7 262.1,121.1 268.5,120.3 274.9,114.0 281.3,113.5 287.7,112.8 294.1,112.2 300.5,111.6 306.9,111.2 313.3,110.4 319.7,113.6 326.1,107.0 332.5,110.4 338.8,113.7 345.2,107.4 351.6,100.8 358.0,100.1 364.4,99.4 370.8,98.7 377.2,97.9 383.6,91.3 390.0,90.6 396.4,89.9 402.8,89.3 409.2,88.7 415.5,88.0 421.9,81.3 428.3,74.7 434.7,73.9 441.1,73.5 447.5,66.8 453.9,70.0 460.3,69.3 466.7,68.6 473.1,68.0 479.5,67.5 485.9,66.9 492.2,70.1 498.6,73.6 505.0,73.1 511.4,66.8 517.8,69.9 524.2,63.4 530.6,66.6 537.0,69.9 543.4,69.1 549.8,68.4 556.2,68.0 562.6,71.2 568.9,74.5 575.3,73.8 581.7,73.1 588.1,66.6 594.5,65.8 600.9,65.1 607.3,58.5 613.7,57.9 620.1,61.3 626.5,64.6 632.9,58.0 639.3,57.3 645.6,50.7 652.0,50.2 658.4,49.5 664.8,43.1 671.2,36.6 677.6,30.2 684.0,29.5" fill="none" stroke="#4ade80" stroke-width="1.6"/>
+    <polyline points="64.0,181.9 70.7,175.4 77.5,178.8 84.2,182.2 91.0,185.4 97.7,188.6 104.4,188.0 111.2,181.5 117.9,181.0 124.7,174.6 131.4,168.1 138.1,161.5 144.9,154.9 151.6,148.3 158.3,142.0 165.1,141.3 171.8,140.5 178.6,134.2 185.3,137.5 192.0,140.9 198.8,144.2 205.5,137.7 212.3,131.1 219.0,124.5 225.7,127.8 232.5,121.3 239.2,114.7 246.0,114.1 252.7,117.3 259.4,110.9 266.2,110.2 272.9,109.5 279.7,108.8 286.4,108.0 293.1,107.3 299.9,106.6 306.6,100.0 313.3,93.7 320.1,93.0 326.8,92.3 333.6,91.9 340.3,95.2 347.0,98.5 353.8,101.6 360.5,101.0 367.3,100.2 374.0,99.4 380.7,98.8 387.5,98.3 394.2,97.5 401.0,96.7 407.7,96.2 414.4,95.6 421.2,95.1 427.9,88.6 434.7,87.9 441.4,87.1 448.1,86.4 454.9,89.6 461.6,83.1 468.3,76.5 475.1,79.6 481.8,79.0 488.6,78.4 495.3,72.0 502.0,71.5 508.8,65.1 515.5,58.6 522.3,51.9 529.0,51.2 535.7,50.5 542.5,49.8 549.2,49.1 556.0,48.5 562.7,47.9 569.4,51.0 576.2,54.2 582.9,53.4 589.7,46.8 596.4,46.2 603.1,45.4 609.9,44.7 616.6,44.0 623.3,47.2 630.1,46.5 636.8,45.9 643.6,49.1 650.3,42.8 657.0,46.0 663.8,45.4 670.5,48.6 677.3,48.1 684.0,47.3" fill="none" stroke="#22d3ee" stroke-width="1.6"/>
+    <text x="690" y="32.5" font-family="DM Mono,monospace" font-size="10" fill="#4ade80">+$26k</text>
+    <text x="690" y="60.3" font-family="DM Mono,monospace" font-size="10" fill="#22d3ee">+$23k</text>
+    <text x="552" y="62.1" font-family="DM Mono,monospace" font-size="8.5" fill="#fbbf24">płaski ogon = choppy 2026 →</text>
+    <text x="684" y="218" text-anchor="end" font-family="DM Mono,monospace" font-size="8.5" fill="#666">kolejne trade →</text>
+    <text x="66" y="218" font-family="DM Mono,monospace" font-size="8.5" fill="#4ade80">— 2022-23</text>
+    <text x="150" y="218" font-family="DM Mono,monospace" font-size="8.5" fill="#22d3ee">— 2025-26</text>
+  </svg>
+  <p class="muted">Krzywa kapitału z prawdziwych tradów backtestu (każdy punkt = jeden trade, ta sama reguła scale-out, po kosztach). Niebieska (2025–26) obejmuje cały rok — jej <b>spłaszczony ogon to realny choppy</b> luty–czerwiec 2026, gdzie edge zamarł. Max obsunięcie 2025: −$2 256.</p>
+  <div class="callout a"><b>Co to mówi:</b> edge działa w <b>dwóch niezależnych okresach</b> (różne lata, różne rynki) i umiera tylko w ostatnim, choppy. To <b>nie wygasanie</b> — to zależność od reżimu. Stąd cały sens monitora reżimu: handlujesz tylko, gdy warunki sprzyjają.</div>
+  <p class="muted">Wcześniejsza wersja celu („zamknij na najbliższej płynności") dawała RR ~0,27 — krucha. Wyjście scale-out 1:3 (sekcja 04) to naprawia: te liczby są już na nim.</p>
+</section>
+
+<!-- STRATEGIA -->
+<section id="strategia">
+  <h2><span class="n">02</span>Strategia — łańcuch wejścia</h2>
+  <p>Tradujemy <b>M1</b>. Wejście powstaje, gdy zajdzie cała sekwencja — nie wcześniej:</p>
+  <div class="chain">
+    <div class="ch"><div class="k">1 · katalizator</div><div class="t">Strefa/poziom</div><div class="d">Cena wchodzi w interakcję z poziomem z menu (sekcja 03).</div></div>
+    <div class="ch"><div class="k">2 · displacement</div><div class="t">Impuls kierunkowy</div><div class="d">Noga 1–3+ świec w jedną stronę, ciała w tym samym kierunku, ≥1,5× ATR(5m) i większa niż największe ciało z 10 barów. Zostawia FVG.</div></div>
+    <div class="ch"><div class="k">3 · FVG</div><div class="t">Luka po impulsie</div><div class="d">Fair Value Gap zostawiona przez displacement. Jej środek = CE (50%).</div></div>
+    <div class="ch"><div class="k">4 · retrace + odbicie</div><div class="t">Powrót do CE</div><div class="d">Cena wraca do CE i odbija, nie przebijając dalekiej krawędzi FVG.</div></div>
+    <div class="ch"><div class="k">5 · BOS</div><div class="t">Potwierdzenie</div><div class="d">Break of structure — przełamanie ekstremum w kierunku. To zielone światło.</div></div>
+    <div class="ch"><div class="k">6 · wejście</div><div class="t">Entry @ CE</div><div class="d">Limit na CE. SL za strukturą. Cel wg reguły wyjścia.</div></div>
+  </div>
+  <div class="two">
+    <div class="card g"><div class="ct">Model Reversal</div><p>Sweep płynności <b>knotem</b> (zbiera stopy), potem displacement w przeciwną stronę. Odwrócenie.</p></div>
+    <div class="card a"><div class="ct">Model Continuation</div><p>Przebicie poziomu <b>ciałem</b> świecy, potem kontynuacja w kierunku ruchu.</p></div>
+  </div>
+  <p class="muted">Kierunek tradu wynika z mechaniki katalizatora — bez osobnego modelu bias HTF. Okna sesji (UTC-4): Asia 20:00–00:00 · London 02:00–05:00 · NY Lunch 12:00–13:00 · NY PM 13:30–16:00. Killzone tradowe: London 02–05, NYAM 09:30–11, NYPM 13:30–16.</p>
+</section>
+
+<!-- KATALIZATORY -->
+<section id="katalizatory">
+  <h2><span class="n">03</span>Katalizatory — menu poziomów</h2>
+  <table>
+    <tr><th>Katalizator</th><th>Co to</th></tr>
+    <tr><td class="mono">F.P.FVG</td><td>Pierwszy FVG sesji NYAM — najsilniejszy z menu.</td></tr>
+    <tr><td class="mono">H/L sesji</td><td>Szczyt/dołek sesji (Asia/London/Lunch) zebrany kierunkowo. Pierwsze dotknięcie.</td></tr>
+    <tr><td class="mono">BSL / SSL</td><td>Buy-/Sell-side liquidity na H1 — pule stopów nad/pod swingami.</td></tr>
+    <tr><td class="mono">NDOG / NWOG</td><td>New Day/Week Opening Gap — luka otwarcia jako poziom/magnes.</td></tr>
+    <tr><td class="mono">VI</td><td>Volume Imbalance — luka wolumenowa, magnes powrotu.</td></tr>
+  </table>
+  <p class="muted">Świeżość: poziom liczy się przy <b>pierwszej</b> interakcji (sesyjne H/L, F.P.FVG, BSL/SSL, NDOG/NWOG). Sesja katalizatora ≠ sesja tradu. W planach: M15 FVG jako dodatkowy katalizator.</p>
+</section>
+
+<!-- WYJSCIE -->
+<section id="wyjscie">
+  <h2><span class="n">04</span>Wyjście — scale-out 1:3 (zweryfikowane)</h2>
+  <div class="callout g"><b>Reguła:</b> 1/3 pozycji na <b>1:1</b> · SL runnera na <b>breakeven</b> po 1R · reszta na <b>1:3</b>. Bierzemy tylko setupy ze <b>SL 10–30 pkt</b>. Ryzyko 0,5% / 100k.</div>
+  <table>
+    <tr><th>Etap</th><th>Poziom</th><th>Akcja</th></tr>
+    <tr><td class="g">T1</td><td>1:1 (1R)</td><td>Zamknij 1/3. Przesuń SL runnera na breakeven.</td></tr>
+    <tr><td class="a">Runner</td><td>1:3 (3R)</td><td>Reszta (2/3) jedzie na 1:3. Po BE nie może oddać.</td></tr>
+    <tr><td>SL</td><td>za strukturą</td><td>Dociąganie do knota = dyskrecja, nie automat.</td></tr>
+  </table>
+  <p class="muted">Sprawdzone warianty: BE po 1R bije BE po 2R (WR 78% vs 55%). Dodatkowy partial na 1:2 — neutralny (gładsza krzywa, nie więcej zysku). Filtr SL 10–30 jest istotny: bardzo ciasne stopy (3–5 pkt) dają absurdalne rozmiary i zżerają koszty.</p>
+</section>
+
+<!-- REZIM -->
+<section id="rezim">
+  <h2><span class="n">05</span>Reżim — kiedy ufać przewadze</h2>
+  <p>Skoro edge zależy od reżimu, potrzebujesz odczytu <b>charakteru rynku</b>, zanim zagrasz. To robi monitor: <a href="https://agentsignals-production.up.railway.app/monitor">…/monitor</a>.</p>
+  <table>
+    <tr><th>Typ rynku</th><th>Sygnał</th><th>Co robisz</th></tr>
+    <tr><td class="g">Trendowy</td><td>wąskie SL, setupy działają (PF ≥1,6)</td><td>Pełny rozmiar wg planu.</td></tr>
+    <tr><td class="a">Niejasny / cichy</td><td>mało rozstrzygniętych tradów, brak setupów</td><td>Połowiczny rozmiar, tylko A-setupy.</td></tr>
+    <tr><td class="r">Choppy</td><td>szerokie SL (mediana &gt;35 pkt), brak czystych wybić</td><td>Stop. Paper / minimalny rozmiar.</td></tr>
+  </table>
+  <div class="callout a"><b>Jak czytać monitor:</b> liczba „X tradów" to licznik zaufania. <b>0 tradów</b> = rolling PF/EV nie ma na czym liczyć → ufaj wtedy badge'owi typu rynku, nie werdyktowi PF. <b>≥10 tradów</b> = werdykt PF/EV wiarygodny. Okno = ostatnie ~10 dni (bufor), odświeża się co 60 s.</div>
+</section>
+
+<!-- SYSTEM LIVE -->
+<section id="system">
+  <h2><span class="n">06</span>System live — agent</h2>
+  <p>Pine „Agent feed" wysyła co domknięty bar 1m → agent trzyma bufor, liczy detektor i wysyła na Telegram tylko świeże, potwierdzone setupy. Dwa etapy alertu:</p>
+  <div class="two">
+    <div class="card a"><div class="ct">⏳ Przygotuj się</div><p>Na odbiciu od CE (przed BOS). „Zaloguj się i czekaj" — <b>NIE wejście</b>. ~72% dochodzi do BOS, ~28% nie. Daje czas, bo CE żyje ~1,5 min.</p></div>
+    <div class="card g"><div class="ct">🟢 Potwierdzony</div><p>Po BOS. Entry @ CE, SL, TP + policzona wielkość pozycji (0,5%). To zielone światło.</p></div>
+  </div>
+  <p class="muted">Endpointy agenta: <span class="mono">/monitor</span> (reżim) · <span class="mono">/candidates</span> (ślad detektora) · <span class="mono">/status</span> · <span class="mono">/chart</span> (ostatni setup) · <span class="mono">/journal</span> · <span class="mono">/regime</span>. Adres: <span class="mono">agentsignals-production.up.railway.app</span>.</p>
+</section>
+
+<!-- PRZYKLAD TRADU -->
+<section id="przyklad">
+  <h2><span class="n">07</span>Przykład tradu — krok po kroku</h2>
+  <p class="muted">Prawdziwy trade z backtestu: 4 sierpnia 2025, model Continuation, katalizator F.P.FVG, LONG. Pokazuje cały łańcuch i wyjście scale-out w akcji.</p>
+  <div style="margin:14px 0">
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)"><span class="mono" style="color:var(--text-dim);min-width:62px;font-size:12px">~09:40</span><span style="font-size:13.5px">Po otwarciu NYAM impuls w górę (kilka świec, ciała w górę) zostawia <b>pierwszą FVG sesji = F.P.FVG</b>. Przebicie ciałem → model <b>Continuation</b>.</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)"><span class="mono" style="color:var(--amber);min-width:62px;font-size:12px">09:46</span><span style="font-size:13.5px">Cena wraca do CE (~23196) i <b>odbija</b>. 📱 <b style="color:var(--amber)">⏳ PRZYGOTUJ SIĘ</b> LONG · entry~23195.8 · SL~23176.0. Logujesz się, czekasz na BOS.</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)"><span class="mono" style="color:var(--green);min-width:62px;font-size:12px">09:47</span><span style="font-size:13.5px"><b>BOS w górę</b> (przełamanie swing high). 📱 <b style="color:var(--green)">🟢 LONG</b> · entry <b>23195.8</b> · SL <b>23176.0</b> (R=19,8 pkt) · ~12 kontr ($500 ryzyka). Limit na CE.</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)"><span class="mono" style="color:var(--text-dim);min-width:62px;font-size:12px">T1 · 1R</span><span style="font-size:13.5px"><b>23215.6</b> — zamknij <b>1/3</b> (~4 kontr). SL runnera → <b>breakeven</b> (23195.8). Reszta jedzie za darmo.</span></div>
+    <div style="display:flex;gap:12px;padding:11px 0"><span class="mono" style="color:var(--green);min-width:62px;font-size:12px">3R · cel</span><span style="font-size:13.5px"><b>23255.2</b> — runner (8 kontr) trafia. <b style="color:var(--green)">Łącznie +$1 119</b> przy ryzyku $500.</span></div>
+  </div>
+  <div class="callout g"><b>O to chodzi:</b> ⏳ daje ~1 min przewagi (CE żyje krótko), 🟢 wchodzi dopiero po BOS, a scale-out zabezpiecza 1/3 na 1R i pozwala runnerowi dojechać na 3R bez ryzyka. To dokładnie reguła z sekcji 04 na żywym przykładzie.</div>
+</section>
+
+<!-- KIEDY NIE GRAC -->
+<section id="niegrac">
+  <h2><span class="n">08</span>Kiedy nie grać</h2>
+  <ul>
+    <li class="no"><b>Reżim STOP / choppy</b> — monitor pokazuje szerokie SL albo brak setupów. Najważniejsza blokada.</li>
+    <li class="no"><b>FOMC w oknie</b> (decyzja 14:00 ET) — 17.06, 29.07; minutes 08.07. Maks. zmienność w NY PM.</li>
+    <li class="no"><b>Dni newsów</b> 8:30 ET — CPI/NFP/PCE: graj PM tylko, jeśli rano ułożyła się czysta struktura.</li>
+    <li class="no"><b>Brak potwierdzenia BOS</b> — pre-alert ⏳ to nie wejście. Bez 🟢 nie wchodzisz.</li>
+    <li class="no"><b>Forced trade</b> — w analizie ~230 historycznych tradów forced trade miał <b>0% win rate</b>. Cisza agenta w choppy to ochrona. NO TRADE = WIN.</li>
+  </ul>
+</section>
+
+<div class="foot">
+  Statystyki: backtest Databento 1-min (MNQ.v.0), scale-out 1:3 (BE, SL 10–30), 0,5%/100k, po kosztach. Wejścia modelowe — estymata.
+  Reżim live: <span class="mono">…/monitor</span>. Plan dni handlu (newsy 60 dni): osobny dokument <span class="mono">challenge.html</span>.
+  Twarda zasada: przewaga jest realna, ale tylko w trendowym reżimie — handluj wtedy, siedź w choppy.
+</div>
+
+</body>
+</html>
