@@ -106,8 +106,17 @@ b.g{color:var(--green)} b.r{color:var(--red)} b.a{color:var(--amber)}
   <div class="param"><div class="l">Cel zysku</div><div class="v g">$6 000</div></div>
   <div class="param"><div class="l">Trailing drawdown</div><div class="v r">$3 000</div></div>
   <div class="param"><div class="l">Ryzyko / trade</div><div class="v">$500 · 0,5%</div></div>
-  <div class="param"><div class="l">Okno</div><div class="v">NY PM 13:30–16:00</div></div>
+  <div class="param"><div class="l">Okno</div><div class="v" style="font-size:15px">Wszystkie (alerty agenta)</div></div>
 </div>
+
+<h2>Matematyka zdania — z naszego edge'u (Monte Carlo, 200k symulacji)</h2>
+<div class="params">
+  <div class="param"><div class="l">Rozkład / trade</div><div class="v" style="font-size:12px">+2R 50% · −1R 19% · 0R 30%</div></div>
+  <div class="param"><div class="l">EV / trade</div><div class="v g">+0,81R</div></div>
+  <div class="param"><div class="l">Tradów do zdania</div><div class="v">~14 mediana</div></div>
+  <div class="param"><div class="l">P(zdania)</div><div class="v g">99,6%</div></div>
+</div>
+<div class="sub">Przy <b>$500/R</b>: PASS <b class="g">99,6%</b> · BLOW <b class="r">0,4%</b> · mediana <b>14</b> tradów (p90 23). Przy $300/R: PASS 100%, ~24 trady (bezpieczniej, dłużej). <b class="g">Edge zdaje sam.</b> Jedyne realne ryzyko to <b class="r">TY forsująca trady w martwym rynku</b> — forced trade w Twojej historii = 0% WR. Tempo: 14–24 trady → ~5–10 tyg w normalnym reżimie. Obecny rynek wolny (nic od 27.05) + okno pełne FOMC → liczy się wolniej. <b>NIE goń zegara.</b></div>
 
 <!-- GATE -->
 <div class="gate">
@@ -115,8 +124,8 @@ b.g{color:var(--green)} b.r{color:var(--red)} b.a{color:var(--amber)}
   <div class="steps">
     <div class="gstep stop"><div class="n">01 · REŻIM</div><div class="q">Monitor ≠ STOP?</div><div class="d">Sprawdź <code>/monitor</code>. Czerwony = nie handlujesz, kropka. Dziś: STOP.</div></div>
     <div class="gstep stop"><div class="n">02 · NEWS</div><div class="q">Dzień ≠ czerwony?</div><div class="d">FOMC w oknie = absolutny brak tradu. Sprawdź kalendarz niżej.</div></div>
-    <div class="gstep cond"><div class="n">03 · OKNO</div><div class="q">Jesteś w NY PM?</div><div class="d">Tylko 13:30–16:00 ET. Twoja jedyna zyskowna sesja.</div></div>
-    <div class="gstep ok"><div class="n">04 · SETUP</div><div class="q">Potwierdzony?</div><div class="d">Alert agenta z BOS, SL 10–30 pkt, RR≥1. Brak = brak tradu.</div></div>
+    <div class="gstep cond"><div class="n">03 · ALERT</div><div class="q">Alert agenta?</div><div class="d">Graj z alertów Telegram, nie z patrzenia w ekran. Edge najgrubszy w NY AM. PREM/LO odpuszczaj.</div></div>
+    <div class="gstep ok"><div class="n">04 · SETUP</div><div class="q">Potwierdzony?</div><div class="d">BOS potwierdzony, SL 10–30 pkt, TP stały 2R. Brak = brak tradu.</div></div>
   </div>
   <div class="verdict">
     <span class="dot"></span>
@@ -160,7 +169,8 @@ b.g{color:var(--green)} b.r{color:var(--red)} b.a{color:var(--amber)}
     <div class="ch" style="color:var(--green)">Rób</div>
     <ul class="disc">
       <li>Graj tylko gdy bramka = 4× TAK.</li>
-      <li>SL 10–30 pkt, wyjście 1/3 @1R · BE · runner 1:3.</li>
+      <li>Graj z <b>alertów agenta</b> (Telegram), nie z gapienia w ekran — łapiesz wszystkie okna mimo dziecka.</li>
+      <li>SL 10–30 pkt, wyjście: <b class="g">BE@1R · TP całość 2R · pełna pozycja</b>.</li>
       <li>Maks. ryzyko $500 (0,5%) — chroni trailing DD $3 000 (=6 stratnych z rzędu zanim problem).</li>
       <li>Brak setupu / reżim STOP = <b class="g">dzień wolny to wygrana</b>.</li>
     </ul>
