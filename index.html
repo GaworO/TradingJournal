@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT NQ — Centrum</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#0a0a0a; --surface:#141414; --surface2:#1c1c1c; --border:#262626;
+  --green:#4ade80; --green-dim:#0f2a1a; --green-mid:#1a3d2a;
+  --amber:#fbbf24; --amber-dim:#2a1f08; --aqua:#22d3ee; --aqua-dim:#0a2a30;
+  --text:#ebebeb; --text-dim:#555; --text-mid:#888;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.5;
+  max-width:760px;margin:0 auto;padding:36px 20px 80px;min-height:100vh}
+.mono{font-family:'DM Mono',monospace}
+a{text-decoration:none;color:inherit}
+
+.head{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:26px}
+.head .brand{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--green)}
+.head h1{font-size:30px;font-weight:600;letter-spacing:-.02em;margin:10px 0 6px}
+.head .tag{font-size:14px;color:var(--text-mid)}
+
+.group{margin:28px 0}
+.group .lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+.tile{display:block;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:18px;
+  transition:border-color .15s,background .15s;border-left:2px solid var(--border)}
+.tile:hover{background:var(--surface2)}
+.tile .t{font-size:16px;font-weight:600;display:flex;align-items:center;gap:9px}
+.tile .ic{font-size:17px}
+.tile .d{font-size:12.5px;color:var(--text-mid);margin-top:6px;line-height:1.45}
+.tile .meta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-top:10px}
+.tile.doc:hover{border-left-color:var(--aqua)}
+.tile.live:hover{border-left-color:var(--green)}
+.tile.live .meta{color:var(--green)}
+
+.foot{margin-top:34px;border-top:1px solid var(--border);padding-top:16px;font-size:11.5px;color:var(--text-dim);line-height:1.7}
+.foot b{color:var(--text-mid);font-weight:500}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:6px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="brand">◇ ICT NQ</div>
+  <h1>Centrum</h1>
+  <div class="tag">System sygnałów ICT na MNQ 1-min — dokumenty i narzędzia agenta w jednym miejscu.</div>
+</div>
+
+<div class="group">
+  <div class="lbl">Dokumenty</div>
+  <div class="grid">
+    <a class="tile doc" href="guide.html">
+      <div class="t"><span class="ic">📘</span> Guide</div>
+      <div class="d">Strategia, łańcuch wejścia, statystyki z 2 lat, krzywa kapitału, przykład tradu, reżim.</div>
+      <div class="meta">strategia · staty</div>
+    </a>
+    <a class="tile doc" href="challenge.html">
+      <div class="t"><span class="ic">🎯</span> Challenge 60 dni</div>
+      <div class="d">Plan przejścia Apex 100k: bramka GO/NO-GO + kalendarz newsów (FOMC / CPI / NFP).</div>
+      <div class="meta">plan · kalendarz</div>
+    </a>
+  </div>
+</div>
+
+<div class="group">
+  <div class="lbl"><span class="dot"></span>Agent — na żywo</div>
+  <div class="grid">
+    <a class="tile live" href="https://agentsignals-production.up.railway.app/monitor" target="_blank" rel="noopener">
+      <div class="t"><span class="ic">📡</span> Monitor reżimu</div>
+      <div class="d">Werdykt GRAJ / OSTROŻNIE / STOP + typ rynku. Sprawdź PRZED sesją.</div>
+      <div class="meta">/monitor</div>
+    </a>
+    <a class="tile live" href="https://agentsignals-production.up.railway.app/candidates?hours=6" target="_blank" rel="noopener">
+      <div class="t"><span class="ic">🔍</span> Candidates</div>
+      <div class="d">Ślad detektora — co agent widział i czemu (nie) zagrał.</div>
+      <div class="meta">/candidates</div>
+    </a>
+    <a class="tile live" href="https://agentsignals-production.up.railway.app/journal" target="_blank" rel="noopener">
+      <div class="t"><span class="ic">📒</span> Journal</div>
+      <div class="d">Dziennik wykrytych setupów z wynikami.</div>
+      <div class="meta">/journal</div>
+    </a>
+    <a class="tile live" href="https://agentsignals-production.up.railway.app/status" target="_blank" rel="noopener">
+      <div class="t"><span class="ic">💚</span> Status</div>
+      <div class="d">Czy agent żyje: świeżość baru, bufor, webhook.</div>
+      <div class="meta">/status</div>
+    </a>
+  </div>
+</div>
+
+<div class="foot">
+  <b>Zasada:</b> przewaga jest realna, ale tylko w trendowym reżimie — sprawdź monitor, zanim zagrasz.<br>
+  Alerty: <b class="mono">@nq_money_maker_bot</b> · ⏳ przygotuj się → 🟢 potwierdzony. Okno: NY PM 13:30–16:00.
+</div>
+
+</body>
+</html>
