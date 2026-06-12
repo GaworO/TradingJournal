@@ -112,11 +112,12 @@ b.g{color:var(--green)} b.r{color:var(--red)} b.a{color:var(--amber)}
 <h2>Matematyka zdania — z naszego edge'u (Monte Carlo, 200k symulacji)</h2>
 <div class="params">
   <div class="param"><div class="l">Rozkład / trade</div><div class="v" style="font-size:12px">+2R 50% · −1R 19% · 0R 30%</div></div>
-  <div class="param"><div class="l">EV / trade</div><div class="v g">+0,81R</div></div>
+  <div class="param"><div class="l">EV / trade</div><div class="v g" style="font-size:13px">A +0,81R · A+B +0,66R</div></div>
   <div class="param"><div class="l">Tradów do zdania</div><div class="v">~14 mediana</div></div>
   <div class="param"><div class="l">P(zdania)</div><div class="v g">99,6%</div></div>
 </div>
 <div class="sub">Przy <b>$500/R</b>: PASS <b class="g">99,6%</b> · BLOW <b class="r">0,4%</b> · mediana <b>14</b> tradów (p90 23). Przy $300/R: PASS 100%, ~24 trady (bezpieczniej, dłużej). <b class="g">Edge zdaje sam.</b> Jedyne realne ryzyko to <b class="r">TY forsująca trady w martwym rynku</b> — forced trade w Twojej historii = 0% WR. Tempo: 14–24 trady → ~5–10 tyg w normalnym reżimie. Obecny rynek wolny (nic od 27.05) + okno pełne FOMC → liczy się wolniej. <b>NIE goń zegara.</b></div>
+<div class="sub" style="margin-top:8px"><b>Wszystkie sesje (od cze 2026):</b> ~3 alerty/tydz po dedup — NY AM 1,2 · PREM 0,8 · LO 0,5 · NY PM 0,2 · AH/ASIA 0,2. Uwaga: twój odzyskany edge (DIB) siedzi głównie w <b>NY AM i PREM</b>, NIE w starym oknie NY PM. Bierz tylko, jeśli realnie ogarniasz te godziny wokół dziecka — inaczej zostajesz przy ~0,2/tydz w PM.</div>
 
 <!-- GATE -->
 <div class="gate">
@@ -124,7 +125,7 @@ b.g{color:var(--green)} b.r{color:var(--red)} b.a{color:var(--amber)}
   <div class="steps">
     <div class="gstep stop"><div class="n">01 · REŻIM</div><div class="q">Monitor ≠ STOP?</div><div class="d">Sprawdź <code>/monitor</code>. Czerwony = nie handlujesz, kropka. Dziś: STOP.</div></div>
     <div class="gstep stop"><div class="n">02 · NEWS</div><div class="q">Dzień ≠ czerwony?</div><div class="d">FOMC w oknie = absolutny brak tradu. Sprawdź kalendarz niżej.</div></div>
-    <div class="gstep cond"><div class="n">03 · ALERT</div><div class="q">Alert agenta?</div><div class="d">Graj z alertów Telegram, nie z patrzenia w ekran. Edge najgrubszy w NY AM. PREM/LO odpuszczaj.</div></div>
+    <div class="gstep cond"><div class="n">03 · ALERT</div><div class="q">Alert agenta?</div><div class="d">Graj z alertów Telegram, nie z ekranu. WSZYSTKIE sesje. Edge: NY AM (1,2/tydz) + PREM (0,8) — <b>PREM TRZYMAJ</b>, drugi największy. Alert ma klasę: 🅰️ A (body, +0,81R) priorytet · 🅱️ B (DIB, +0,58R) gdy A brak. ~3 alerty/tydz.</div></div>
     <div class="gstep ok"><div class="n">04 · SETUP</div><div class="q">Potwierdzony?</div><div class="d">BOS potwierdzony, SL 10–30 pkt, TP stały 2R. Brak = brak tradu.</div></div>
   </div>
   <div class="verdict">
