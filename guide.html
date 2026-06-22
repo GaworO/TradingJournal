@@ -166,12 +166,12 @@ li.no:before{content:"✕";color:var(--red)}
   <table>
     <tr><th>Katalizator</th><th>Co to</th></tr>
     <tr><td class="mono">F.P.FVG</td><td>Pierwszy FVG sesji NYAM — najsilniejszy z menu.</td></tr>
-    <tr><td class="mono">H/L sesji</td><td>Szczyt/dołek sesji (Asia/London/Lunch) zebrany kierunkowo. Pierwsze dotknięcie.</td></tr>
+    <tr><td class="mono">H/L sesji</td><td>Szczyt/dołek sesji (Asia/London/NY AM/Lunch/PM) zebrany kierunkowo. <b>v11:</b> żyje aż do sweepu (nie po czasie), backstop 10 dni; w reżimie choppy gaśnie po końcu dnia, jeśli tapnięty bez potwierdzenia (EOD gate).</td></tr>
     <tr><td class="mono">BSL / SSL</td><td>Buy-/Sell-side liquidity na H1 — pule stopów nad/pod swingami.</td></tr>
     <tr><td class="mono">NDOG / NWOG</td><td>New Day/Week Opening Gap — luka otwarcia jako poziom/magnes.</td></tr>
     <tr><td class="mono">VI</td><td>Volume Imbalance — luka wolumenowa, magnes powrotu.</td></tr>
   </table>
-  <p class="muted">Świeżość: poziom liczy się przy <b>pierwszej</b> interakcji (sesyjne H/L, F.P.FVG, BSL/SSL, NDOG/NWOG). Sesja katalizatora ≠ sesja tradu. W planach: M15 FVG jako dodatkowy katalizator.</p>
+  <p class="muted"><b>Świeżość (v11):</b> poziomy płynności (sesyjne H/L, PDH/PDL, PWH/PWL, BSL/SSL) <b>żyją aż do sweepu — nie wygasają po czasie</b> (backstop 10 dni; w trybie CONFIRM giną po pierwszym potwierdzonym setupie). Strefy (F.P.FVG, NDOG/NWOG, VI) bez zmian — czas/wypełnienie. W reżimie choppy działa filtr <b>EOD</b> (regime-gate, alert na Telegram przy zmianie). Sesja katalizatora ≠ sesja tradu.</p>
 </section>
 
 <!-- WYJSCIE -->
